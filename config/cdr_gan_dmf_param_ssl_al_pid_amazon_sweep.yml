@@ -1,0 +1,28 @@
+method: grid
+metric:
+  name: test_hr_t
+  goal: maximize
+parameters:
+  noise_multiplier_:
+    values:
+      [ 1, 10, 256, 512, 1000] #0.1,1, 10,126, 512, 1000
+
+  model_config:
+    value:
+
+  lr_t:
+    values:
+      [0.0005]
+
+#  lr_d:
+#    values:
+#      [0.0001, 0.00005]
+#  lr_g:
+#    values:
+#      [ 0.0001, 0.00005 ]
+#lr_t: 0.001 #0.0005 #1 # 05 #02 #1 #2 #1 #05 #8 #
+#lr_d: 0.0001
+#lr_g: 0.0001
+#  uuid_tag:
+#    value:
+#      test_model_s_swp_noise_dp_compute

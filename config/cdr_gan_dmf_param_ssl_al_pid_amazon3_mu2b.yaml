@@ -1,0 +1,76 @@
+prior: Gaussian
+seed: 72
+epochs: 300 #40 # 100 #60 # 220 #0 #5 # 10 # 200 #80 #10 #30 # 60 #500 #
+batch_size: 64 #128 #512 #1024  #1604 # 802 #512 #
+batch_size_model_s: 128
+batch_size_model_t: 128 #512 # 1604 #
+emb_size: 200
+method: &method cdr_gan_gnn
+log_prefix: logs
+pos_weight: 1.0 # weight for positive samples
+
+
+lr_t: 0.005 #note best param #0.001 # 05 #02 #1 #2 #1 #05 #8 #
+lr_d: 0.0001
+lr_g: 0.0001
+weight_decay: 0.00002
+dropout: 0.5
+
+m: 2
+scheme: ZP # PM, ZR, ZP #note 暂时没有用这些
+zr_coefficient: 0.25  # alpha in the eq.7: range in {0.5, 0.25, 0.1, 0.05, 0.01} # careful: substitude it with weight_decay
+S_zr_percentage: 50 # rang in {10, 30, 50, 70,90 }
+S_pm_percentage: 50 # rang in {10, 30, 50, 70,90 }
+is_PP: True #False #
+#noise_multiplier_: 1 #000 #1.07 #0.55 #
+noise_multiplier_: 1.07 # 126 #note best param #1.07 #0.55 #
+#noise_multiplier_: 20 #1.07 #0.55 #
+
+reg_orthogonal: 1.0
+reg_raw: 1.0
+reg_cross_trans: 1.0
+d_g_steps: 7 #7 # 77 #
+d_steps: 3 # 3 3 #
+s_epochs:  3 #3 # 4
+t_s_epochs: 10 #6 # 1
+
+t_percent: 1.0
+s_percent: 1.0
+p_percent: 0
+
+DataIn:
+use_discrete: False
+re_generate: False #True #False #
+processed_data_dir:  #../processed_data_rating_le_3
+dataset: amazon3 #movie_book
+source: movie
+target: book
+
+
+lamb_uu: 0.05 #1000 #
+num_of_candidate_negative: 1 # 6 #32 # 负采样个数
+loss_t_method: #bce  # uni # bpr #sml #
+
+#negative sampling
+ns_gamma: 0.5 # 控制diff user margin 的优化权重
+ns_lamda: 0.5 #控制item triplet loss 的权重
+
+knn_size: 16 #5 #
+latent_size: 256
+#pp_G_s_model_path:
+#pp_G_s_model_path:
+#uuid_tag: test_model_s_swp_dmf_ #4 #
+uuid_tag: processed_data_rating_le_3
+
+
+# config for pid
+pid_type: abs
+pv: 1.
+iv: 0.01
+dv: 0.01
+anneal_iv_factor: -1
+anneal_iv_every: 100000000
+anneal_iv_final: 0.1
+i_size: 512
+i_buffer_factor: 6
+i_buffer_onestep: 512
